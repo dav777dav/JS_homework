@@ -24,18 +24,19 @@ class Book {
         if (!value) {
             console.log("Title must not be an empty string");
         }
-
-        this.#title = value;
-    }
+		else {
+        	this.#title = value;
+    	}
+	}
 
     get author() {
         return this.#author;
     }
 
     set author(value) {
-        if (!value) console.log("Author must not be an empty string");
+        if (!value) { console.log("Author must not be an empty string"); }
 
-        this.#author = value;
+        else { this.#author = value; }
     }
 
     get year() {
@@ -43,23 +44,23 @@ class Book {
     }
 
     set year(value) {
-        if (value < 0) console.log("Year must be a positive number");
+        if (value < 0) { console.log("Year must be a positive number"); }
 
-        this.#year = value;
+        else { this.#year = value; }
     }
 
     get isAvailable() { return this.#isAvailable; }
 
     borrowBook() {
-        if (!this.#isAvailable) return `"${this.#title}" is already borrowed`;
+        if (!this.#isAvailable) { return `"${this.#title}" is already borrowed`; }
 
-        this.#isAvailable = false;
+        else { this.#isAvailable = false; }
     }
 
     returnBook() {
-        if (!this.#isAvailable) this.#isAvailable = false;
+        if (!this.#isAvailable) { this.#isAvailable = false; }
 
-        return `"${this.#title}" is already returned`;
+        else { return `"${this.#title}" is already returned`; }
     }
 
     matchesTitle(word) {
@@ -89,9 +90,9 @@ class Reader {
     }
 
     set name(value) {
-        if (!value) return "Name must not be an empty string";
+        if (!value) { return "Name must not be an empty string"; }
 
-        this.#name = value;
+        else { this.#name = value; }
     }
 
     get borrowedBooks() {
@@ -103,11 +104,13 @@ class Reader {
     }
         
     takeBook(book) {
-        if (!book.isAvailable) return "The book isn't available";
+        if (!book.isAvailable) { return "The book isn't available"; }
 
-        this.#borrowedBooks.push(book);
+		else {
+        	this.#borrowedBooks.push(book);
 
-        book.borrowBook();
+        	book.borrowBook();
+		}
 	}
 
     giveBackBook(book) {
@@ -116,14 +119,14 @@ class Reader {
             
             book.returnBook();
         }
-
-        return "The book isn't available"
+		
+        else { return "The book isn't available" }
     }
 
     hasBook (book) {
-        if (this.#borrowedBooks.includes(book)) return true;
+        if (this.#borrowedBooks.includes(book)) { return true; }
 
-        return false;
+        else { return false; }
     }
 
     showBorrowedBooks () {
@@ -155,9 +158,9 @@ class Library {
     }
 
     set name (value) {
-        if (!value) return "Name must not be an empty string";
+        if (!value) { return "Name must not be an empty string"; }
 
-        this.#name = value;
+        else { this.#name = value; }
     }
 
     get books ()  {
@@ -179,9 +182,9 @@ class Library {
     findBookByTitle (title) {
         let book = this.#books.find(book1 => book1.title === title);
 
-        if (book) return book;
+        if (book) { return book; }
 
-        return null;
+        else { return null; }
     }
 
     findBooksByAuthor (authorName) {
@@ -191,17 +194,17 @@ class Library {
     giveBookToReader (title, reader) {
         let book = this.findBookByTitle(title);
 
-        if (book) reader.takeBook(book);
+        if (book) { reader.takeBook(book); }
 
-        return "The book is not found";
+        else { return "The book is not found"; }
     }
 
     acceptBookFromReader (title, reader) {
         let book = this.findBookByTitle(title);
 
-        if (book) reader.giveBackBook(book);
+        if (book) { reader.giveBackBook(book); }
 
-        return "The book is not found";
+        else { return "The book is not found"; }
     }
 
     showAvailableBooks () {
